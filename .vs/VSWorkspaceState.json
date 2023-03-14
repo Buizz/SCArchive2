@@ -1,6 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\SCArchive2Setup",
+    "\\SCArchive2Setup\\SCArchive2SetUp",
+    "\\SCArchive2Setup\\SCArchive2SetUp\\SCArchive2SetUp"
   ],
+  "SelectedNode": "\\SCArchive2Setup\\SCArchive2SetUp\\SCArchive2SetUp\\MainWindow.xaml",
   "PreviewInSolutionExplorer": false
 }
