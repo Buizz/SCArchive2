@@ -42,23 +42,18 @@ namespace SCArchive2SetUp
         private string version;
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
-
-
-
             string[] Args = Environment.GetCommandLineArgs();
 
             exepath = AppDomain.CurrentDomain.BaseDirectory;
             System.IO.DirectoryInfo topDir = new System.IO.DirectoryInfo(exepath);
             exeparetpath = topDir.Parent.FullName;
             scaexepath = topDir.Parent.FullName + @"\SCArchive 2.exe";
-            updatetemppath = AppDomain.CurrentDomain.BaseDirectory + @"temp";
-            zipfilepath = updatetemppath + @"\updatetemp";
+            updatetemppath = AppDomain.CurrentDomain.BaseDirectory + @"updatetemp";
+            zipfilepath = updatetemppath + @"\updatefile";
 
             //https://raw.githubusercontent.com/Buizz/SCArchive2/main/version
 
 
-            //temp폴더 생성
-            if (!System.IO.Directory.Exists(updatetemppath)) System.IO.Directory.CreateDirectory(updatetemppath);
 
             //SCA가 존재할 경우는 업데이트 아닐 경우 새로설치
             if (System.IO.File.Exists(scaexepath))
@@ -76,9 +71,37 @@ namespace SCArchive2SetUp
             {
                 Background.Visibility = Visibility.Collapsed;
                 IsUpdate = true;
-                updatetemppath = exeparetpath + @"\temp";
-                zipfilepath = updatetemppath + @"\updatetemp";
-                unZipFile();
+                updatetemppath = exeparetpath + @"\updatetemp";
+                zipfilepath = updatetemppath + @"\updatefile";
+
+
+                try
+                {
+                    string setupfile = topDir.Parent.FullName + @"\SCArchive2SetUp.exe";
+                    string setupconfigfile = topDir.Parent.FullName + @"\SCArchive2SetUp.exe.config";
+
+                    if(System.IO.File.Exists(setupfile))
+                    {
+                        System.IO.File.Delete(setupfile);
+                    }
+                    if (System.IO.File.Exists(setupconfigfile))
+                    {
+                        System.IO.File.Delete(setupconfigfile);
+                    }
+                }
+                catch (Exception)
+                {
+
+                }
+
+
+                ZipFileList.Clear();
+                using (ZipFile zip = new ZipFile(zipfilepath))
+                {
+                    zip.Password = "scarchive";
+                    ZipFileList.AddRange(zip.EntryFileNames);
+                }
+                statusChange(status.movefile);
             }
             else
             {
@@ -113,13 +136,22 @@ namespace SCArchive2SetUp
 
         private void ExcetionSetting_Click(object sender, RoutedEventArgs e)
         {
-            Process.Start("https://scarchive.kr/bugreport");
+            Process.Start("https://scarchive.kr/bugreport/vaccinesetting.php");
         }
 
         private void startSCA_Click(object sender, RoutedEventArgs e)
         {
-            Process.Start(scaexepath);
-            Close();
+            try
+            {
+                Process.Start(scaexepath);
+                Close();
+            }
+            catch (Exception ex)
+            {
+                StatusMessage.Text = "SCA를 실행 할 수 없습니다. \n백신 예외 설정을 하고 실행해주세요.";
+                ErrorMesage.Text = ex.Message;
+                excetionSettingWindow.Visibility = Visibility.Visible;
+            }
         }
     }
 }

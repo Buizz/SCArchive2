@@ -54,6 +54,18 @@ namespace SCArchive2SetUp
                     moveFile();
                     break;
                 case status.complete:
+                    try
+                    {
+                        if (System.IO.Directory.Exists(updatetemppath))
+                        {
+                            System.IO.Directory.Delete(updatetemppath, true);
+                        }
+                    }
+                    catch (Exception)
+                    {
+
+                    }
+
                     IsForceExit = true;
                     progressBar.Visibility = Visibility.Collapsed;
                     StatusMessage.Text = "설치가 완료되었습니다.";

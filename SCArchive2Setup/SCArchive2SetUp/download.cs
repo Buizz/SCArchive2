@@ -22,13 +22,15 @@ namespace SCArchive2SetUp
     {
         private void downloadZipFile(string link)
         {
+            //temp폴더 생성
+            if (!System.IO.Directory.Exists(updatetemppath)) System.IO.Directory.CreateDirectory(updatetemppath);
             using (WebClient wc = new WebClient())
             {
                 wc.DownloadProgressChanged += wc_DownloadProgressChanged;
                 wc.DownloadFileCompleted += Wc_DownloadFileCompleted;
                 wc.DownloadFileAsync(
                     // Param1 = Link of file
-                    new System.Uri("https://github.com/Buizz/SCArchive2/releases/download/0.2.2.1/SCA2.0.2.2.1_64bit.zip"),
+                    new System.Uri(link),
                     // Param2 = Path to save
                     zipfilepath
                 );

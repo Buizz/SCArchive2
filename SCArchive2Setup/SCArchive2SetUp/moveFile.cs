@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace SCArchive2SetUp
 {
@@ -16,7 +17,6 @@ namespace SCArchive2SetUp
 
             bool IsInstallError = false;
 
-           
             foreach (var file in ZipFileList)
             {
                 if (!IsUpdate)
@@ -86,7 +86,6 @@ namespace SCArchive2SetUp
                     }
                 }
             }
-
 
 
             if (IsInstallError)

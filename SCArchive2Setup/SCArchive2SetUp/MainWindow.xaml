@@ -8,6 +8,7 @@
         xmlns:local="clr-namespace:SCArchive2SetUp"
         WindowStartupLocation="CenterScreen"
         mc:Ignorable="d"
+        WindowTitleBrush="{DynamicResource PrimaryHueLightBrush}"
         Loaded="MetroWindow_Loaded"
         Closing="MetroWindow_Closing"
         Title="SCArchive2 SetUp" Height="350" Width="500" ResizeMode="NoResize">
