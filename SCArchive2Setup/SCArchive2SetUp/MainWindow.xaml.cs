@@ -105,6 +105,12 @@ namespace SCArchive2SetUp
             }
             else
             {
+                ServicePointManager.Expect100Continue = true;
+                ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls
+                                    | SecurityProtocolType.Tls11
+                                    | SecurityProtocolType.Tls12
+                                    | SecurityProtocolType.Ssl3;
                 downloadVersion("https://raw.githubusercontent.com/Buizz/SCArchive2/main/version");
             }
         }
@@ -136,7 +142,8 @@ namespace SCArchive2SetUp
 
         private void ExcetionSetting_Click(object sender, RoutedEventArgs e)
         {
-            Process.Start("https://scarchive.kr/bugreport/vaccinesetting.php");
+            Process.Start(addresslist["vaccinesetting"]);
+            //Process.Start("https://scarchive.kr/bugreport/vaccinesetting.php");
         }
 
         private void startSCA_Click(object sender, RoutedEventArgs e)

@@ -56,9 +56,22 @@ namespace SCArchive2SetUp
 
 
 
-
+        Dictionary<string, string> addresslist = new Dictionary<string, string>();
         private void downloadVersion(string link)
         {
+
+            using (WebClient wc = new WebClient())
+            {
+                string siteaddress = wc.DownloadString(new System.Uri("https://raw.githubusercontent.com/Buizz/SCArchive2/main/siteaddress"));
+
+                string[] address = siteaddress.Split('\n');
+                foreach (var item in address)
+                {
+                    string[] vals = item.Trim().Split('\\');
+                    addresslist.Add(vals.First().Trim(), vals.Last().Trim());
+                }
+            }
+
             using (WebClient wc = new WebClient())
             {
                 wc.DownloadStringCompleted += Wc_DownloadVersion;
