@@ -6,6 +6,8 @@ https://scarchive.kr
 
 Zip 비밀번호는 scarchive입니다.
 
+공식 디스코드
+https://discord.gg/Hkmg7nEk
 
 ## 0.2.13.0
  - 로드 시도를 5초에 한번 하게 수정
