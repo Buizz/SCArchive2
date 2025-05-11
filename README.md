@@ -10,6 +10,10 @@ Zip 비밀번호는 scarchive입니다.
 https://discord.gg/Hkmg7nEk
 
 
+## 0.3.5.0
+ - 다중 빌드된 맵에서 수정된 맵입니다라고 뜨는 버그 수정
+
+
 ## 0.3.4.0
  - Updater 수정
 
